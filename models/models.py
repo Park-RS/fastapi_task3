@@ -1,33 +1,36 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, create_engine, Float, Boolean, Sequence, Identity
+from sqlalchemy import Column, Integer, String, ForeignKey, Identity
 from sqlalchemy.orm import relationship, declarative_base
-from typing import Union,Annotated,Optional
-from pydantic import BaseModel,Field, constr
+from typing import Optional
+from pydantic import BaseModel, Field
+
 Base = declarative_base()
-class Author(Base):
-    __tablename__ = "authors"
+
+class Actor(Base):
+    __tablename__ = "actors"
 
     id = Column(Integer, Identity(start=10), primary_key=True)
     name = Column(String, index=True, nullable=False)
-    books = relationship("Book", back_populates="author")
+    movies = relationship("Movie", back_populates="actor")
 
-class Book(Base):
-    __tablename__ = "books"
+class Movie(Base):
+    __tablename__ = "movies"
 
     id = Column(Integer, Identity(start=1), primary_key=True)
     title = Column(String, index=True, nullable=False)
-    author_id = Column(Integer, ForeignKey("authors.id"))
-    author = relationship("Author", back_populates="books")
+    release_year = Column(Integer)
+    actor_id = Column(Integer, ForeignKey("actors.id"))
+    actor = relationship("Actor", back_populates="movies")
 
 class New_Response(BaseModel):
     message: str
 
-class BookCreate(BaseModel):
+class MovieCreate(BaseModel):
     title: str
-    author_id: Optional[int] = Field(default=10, ge=10)
+    release_year: Optional[int] = Field(default=2022, ge=1900)
 
-class AuthorCreate(BaseModel):
+class ActorCreate(BaseModel):
     name: str
 
-class AuthorModel(BaseModel):
+class ActorModel(BaseModel):
     name: str
     id: Optional[int] = Field(default=10, ge=10)

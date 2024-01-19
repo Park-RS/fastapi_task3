@@ -3,9 +3,9 @@ from dotenv import load_dotenv
 import os
 class Settings(BaseSettings):
     app_name: str = "new API"
-    admin_email: str = "elizavetka07@gmail.com"
-    POSTGRES_URLS: str = "postgresql://postgres:gimeori@localhost:5432/book"
-    POSTGRES_URLA: str = "postgresql+asyncpg://postgres:gimeori@localhost:5432/book"
+    admin_email: str = "shwetsov27@gmail.com"
+    POSTGRES_URLS: str = "postgresql://postgres:033150RRSQL@localhost:5432/movie"
+    POSTGRES_URLA: str = "postgresql+asyncpg://postgres:033150RRSQL@localhost:5432/movie"
     POSTGRES_USER: str
     POSTGRES_PASSWORD: str
     POSTGRES_HOST: str
@@ -14,8 +14,8 @@ class Settings(BaseSettings):
 load_dotenv()
 settings = Settings()
 settings.POSTGRES_PORT = int(os.environ.get('POSTGRES_PORT', 5432))
-settings.POSTGRES_PASSWORD = os.environ.get('POSTGRES_PASSWORD', 'gimeori')
-settings.POSTGRES_DB = os.environ.get('POSTGRES_DB', 'book')
+settings.POSTGRES_PASSWORD = os.environ.get('POSTGRES_PASSWORD', '033150RRSQL')
+settings.POSTGRES_DB = os.environ.get('POSTGRES_DB', 'movie')
 settings.POSTGRES_HOST = os.environ.get('POSTGRES_HOST', 'localhost')
 settings.POSTGRES_USER = os.environ.get('POSTGRES_USER', 'postgres')
 
